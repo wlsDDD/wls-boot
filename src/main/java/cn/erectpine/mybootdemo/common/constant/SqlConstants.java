@@ -5,8 +5,8 @@ package cn.erectpine.mybootdemo.common.constant;
  *
  * @author wls
  */
-public interface SqlCondition {
-
+public interface SqlConstants {
+    
     /*-----------------------------------------------MYSQL-------------------------------------------------*/
     /**
      * 两边like
@@ -44,7 +44,7 @@ public interface SqlCondition {
      * 小于等于
      */
     String LT_EQ      = "%s&gt;=#{%s}";
-
+    
     /*-----------------------------------------------ORACLE-------------------------------------------------*/
     /**
      * oracle两边like查询
@@ -54,5 +54,5 @@ public interface SqlCondition {
      * oracle 至多取一行数据
      */
     String ORACLE_LIMIT_ONE = "AND ROWNUM <= 1";
-
+    
 }

@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
  * @since 2021-01-11 13:53
  * @author wls
  */
-@Configuration
 @MapperScan("cn.erectpine.mybootdemo.project.*.mapper")
+@Configuration
 public class MybatisPlusConfig {
 
     /**

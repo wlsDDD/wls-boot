@@ -23,27 +23,27 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
      *
      * @param page      分页参数
      * @param ${table.entityPath} 查询条件
-     * @return 分页列表
-     */
+    * @return 分页列表
+    */
     IPage<${entity}> page${entity}(Page<${entity}> page, ${entity} ${table.entityPath});
 
     /**
-     * 根据id获取${table.comment!}详情
-     *
-     * @param id id
-     * @return {@link ${entity}}
-     */
-    ${entity} page${entity}(Long id);
+    * 根据id获取${table.comment!}详情
+    *
+    * @param id id
+    * @return {@link ${entity}}
+    */
+    ${entity} get${entity}ById(Long id);
 
     /**
-     * 新增-${table.comment!}
-     *
-     * @param ${table.entityPath} ${table.comment!}
-     */
+    * 新增-${table.comment!}
+    *
+    * @param ${table.entityPath} ${table.comment!}
+    */
     void insert${entity}(${entity} ${table.entityPath});
 
     /**
-     * 修改-${table.comment!}
+    * 修改-${table.comment!}
      *
      * @param ${table.entityPath} ${table.comment!}
      */

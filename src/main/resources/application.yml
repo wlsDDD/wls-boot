@@ -1,19 +1,15 @@
 # 项目相关配置
-ruoyi:
+wls:
   # 名称
-  name: RuoYi
+  name: wls-boot-demo
   # 版本
-  version: 3.3.0
+  version: 0.0.1-SNAPSHOT
   # 版权年份
   copyrightYear: 2021
-  # 实例演示开关
-  demoEnabled: true
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
   profile: D:/ruoyi/uploadPath
   # 获取ip地址开关
   addressEnabled: false
-  # 验证码类型 math 数组计算 char 字符验证
-  captchaType: math
 
 # 开发环境配置
 server:
@@ -21,7 +17,7 @@ server:
   port: 8090
   servlet:
     # 应用的访问路径
-    context-path: /demo
+    context-path: /core
   tomcat:
     # tomcat的URI编码
     uri-encoding: UTF-8
@@ -34,10 +30,19 @@ server:
 
 # Spring配置
 spring:
+  application:
+    name: core
   # 资源信息
   messages:
     # 国际化资源文件路径
     basename: i18n/messages
+
+  # json中忽略null属性值
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true
+
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -45,16 +50,6 @@ spring:
     username: adminlearnleader
     password: uVi7GebTCWGKw5j91U8GPkg7n0j9R_
     druid:
-      # 主库数据源
-#      master:
-
-      # 从库数据源
-#      slave:
-#        # 从数据源开关/默认关闭
-#        enabled: false
-#        url:
-#        username:
-#        password:
       # 初始连接数
       initialSize: 5
       # 最小连接池数量
@@ -100,32 +95,66 @@ spring:
       # 单个文件大小
       max-file-size:  10MB
       # 设置总上传的文件大小
-      max-request-size:  20MB
+      max-request-size: 20MB
+
   # 服务模块
   devtools:
     restart:
       # 热部署开关
       enabled: true
-  # redis 配置
-#  redis:
-#    # 地址
-#    host: erectpine.cn
-#    # 端口，默认为6379
-#    port: 6379
-#    # 数据库索引
-#    database: 0
-#    # 密码
-#    password:
-#    # 连接超时时间
-#    timeout: 10s
-#    lettuce:
-#      pool:
-#        # 连接池中的最小空闲连接
-#        min-idle: 0
-#        # 连接池中的最大空闲连接
-#        max-idle: 8
-#        # 连接池的最大数据库连接数
-#        max-active: 8
-#        # #连接池最大阻塞等待时间（使用负值表示没有限制）
-#        max-wait: -1ms
 
+  # redis 配置
+  redis:
+    # 地址
+    host: 123.57.101.219
+    # 端口，默认为6379
+    port: 6379
+    # 数据库索引
+    database: 0
+    # 密码
+    password:
+    # 连接超时时间
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+
+# MyBatis
+mybatis-plus:
+  # 搜索指定包别名
+  typeAliasesPackage: com.hnct.active.project.*.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/*Mapper.xml
+  typeEnumsPackage: com.hnct.active.project.entity
+  # 加载全局的配置文件
+  #  configLocation: classpath:mybatis/mybatis-config.xml
+  global-config:
+    db-config:
+      # 设置空不查询
+      select-strategy: not_empty
+      # 设置空不更新
+      updateStrategy: not_empty
+      #主键类型 AUTO:"数据库ID自增" INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: AUTO
+      # 全局的entity的逻辑删除字段属性名-对应实体类名
+      logicDeleteField: usable
+      # 逻辑未删除值
+      logicNotDeleteValue: 0
+      # 逻辑已删除值
+      logicDeleteValue: 1
+      #驼峰下划线转换
+      table-underline: true
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: false
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

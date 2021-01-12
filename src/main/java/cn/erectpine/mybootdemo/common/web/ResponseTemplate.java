@@ -7,14 +7,16 @@ import cn.hutool.core.bean.BeanUtil;
 import java.util.HashMap;
 
 /**
+ * 响应模板
  * 操作消息提醒
  *
  * @author wls
+ * @date 2021/01/12
  */
 public class ResponseTemplate extends HashMap<String, Object> {
-
+    
     private static final long serialVersionUID = 1L;
-
+    
     /**
      * 状态码
      */
@@ -27,14 +29,23 @@ public class ResponseTemplate extends HashMap<String, Object> {
      * 数据对象
      */
     public static final String DATA_TAG = "data";
-
-
+    
+    /**
+     * 请求操作成功提示语
+     */
+    public static final String SUCCESS_MSG = "操作成功";
+    /**
+     * 请求操作失败提示语
+     */
+    public static final String ERROR_MSG   = "操作失败";
+    
+    
     /**
      * 初始化一个新创建的 ResponseTemplate 对象，使其表示一个空消息。
      */
     public ResponseTemplate() {
     }
-
+    
     /**
      * 初始化一个新创建的 ResponseTemplate 对象
      *
@@ -45,7 +56,7 @@ public class ResponseTemplate extends HashMap<String, Object> {
         super.put(CODE_TAG, code);
         super.put(MSG_TAG, msg);
     }
-
+    
     /**
      * 初始化一个新创建的 ResponseTemplate 对象
      *
@@ -59,33 +70,41 @@ public class ResponseTemplate extends HashMap<String, Object> {
         if (BeanUtil.isNotEmpty(data)) {
             super.put(DATA_TAG, data);
         }
-
+        
     }
-
+    
+    
+    /**
+     * 重写put方法,方便链式调用
+     *
+     * @param key   key
+     * @param value object
+     * @return {@link ResponseTemplate}
+     */
     @Override
     public ResponseTemplate put(String key, Object value) {
         super.put(key, value);
         return this;
     }
-
+    
     /**
      * 返回成功消息
      *
      * @return 成功消息
      */
     public static ResponseTemplate success() {
-        return ResponseTemplate.success("操作成功");
+        return ResponseTemplate.success(SUCCESS_MSG);
     }
-
+    
     /**
      * 返回成功数据
      *
      * @return 成功消息
      */
     public static ResponseTemplate success(Object data) {
-        return ResponseTemplate.success("操作成功", data);
+        return ResponseTemplate.success(SUCCESS_MSG, data);
     }
-
+    
     /**
      * 返回成功消息
      *
@@ -95,7 +114,7 @@ public class ResponseTemplate extends HashMap<String, Object> {
     public static ResponseTemplate success(String msg) {
         return ResponseTemplate.success(msg, null);
     }
-
+    
     /**
      * 返回成功消息
      *
@@ -106,7 +125,7 @@ public class ResponseTemplate extends HashMap<String, Object> {
     public static ResponseTemplate success(String msg, Object data) {
         return new ResponseTemplate(HttpStatus.SUCCESS, msg, data);
     }
-
+    
     /**
      * 错误
      * 返回错误消息
@@ -114,9 +133,9 @@ public class ResponseTemplate extends HashMap<String, Object> {
      * @return {@link ResponseTemplate}
      */
     public static ResponseTemplate error() {
-        return ResponseTemplate.error("操作失败");
+        return ResponseTemplate.error(ERROR_MSG);
     }
-
+    
     /**
      * 返回错误消息
      *
@@ -126,7 +145,7 @@ public class ResponseTemplate extends HashMap<String, Object> {
     public static ResponseTemplate error(String msg) {
         return ResponseTemplate.error(msg, null);
     }
-
+    
     /**
      * 返回错误消息
      *
@@ -137,7 +156,7 @@ public class ResponseTemplate extends HashMap<String, Object> {
     public static ResponseTemplate error(String msg, Object data) {
         return new ResponseTemplate(HttpStatus.ERROR, msg, data);
     }
-
+    
     /**
      * 返回错误消息
      *
@@ -148,7 +167,7 @@ public class ResponseTemplate extends HashMap<String, Object> {
     public static ResponseTemplate error(int code, String msg) {
         return new ResponseTemplate(code, msg, null);
     }
-
+    
     /**
      * 返回错误消息
      *
@@ -160,5 +179,5 @@ public class ResponseTemplate extends HashMap<String, Object> {
     public static ResponseTemplate error(int code, String msg, Object data) {
         return new ResponseTemplate(code, msg, data);
     }
-
+    
 }

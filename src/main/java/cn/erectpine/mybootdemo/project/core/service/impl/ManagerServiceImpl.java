@@ -1,14 +1,14 @@
-package cn.erectpine.mybootdemo.project.demo.service.impl;
+package cn.erectpine.mybootdemo.project.core.service.impl;
 
-import cn.erectpine.mybootdemo.project.demo.entity.Manager;
-import cn.erectpine.mybootdemo.project.demo.mapper.ManagerMapper;
-import cn.erectpine.mybootdemo.project.demo.service.IManagerService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import cn.erectpine.mybootdemo.project.core.entity.Manager;
+import cn.erectpine.mybootdemo.project.core.mapper.ManagerMapper;
+import cn.erectpine.mybootdemo.project.core.service.IManagerService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * <p>
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * </p>
  *
  * @author wls
- * @since 2021-01-08
+ * @since 2021-01-12
  */
 @Service
 public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> implements IManagerService {
@@ -33,9 +33,9 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
      */
     @Override
     public IPage<Manager> pageManager(Page<Manager> page, Manager manager) {
-        return page(page, Wrappers.lambdaQuery(manager).select(Manager::getManagerId,Manager::getManagerName));
+        return page(page, Wrappers.lambdaQuery(manager).orderByDesc(Manager::getCreateTime));
     }
-
+    
     /**
      * 根据id获取管理员信息表详情
      *
@@ -43,7 +43,7 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
      * @return {@link Manager}
      */
     @Override
-    public Manager pageManager(Long id) {
+    public Manager getManagerById(Long id) {
         return getById(id);
     }
 

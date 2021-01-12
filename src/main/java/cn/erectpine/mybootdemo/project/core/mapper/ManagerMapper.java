@@ -1,6 +1,6 @@
-package cn.erectpine.mybootdemo.project.demo.mapper;
+package cn.erectpine.mybootdemo.project.core.mapper;
 
-import cn.erectpine.mybootdemo.project.demo.entity.Manager;
+import cn.erectpine.mybootdemo.project.core.entity.Manager;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author wls
- * @since 2021-01-08
+ * @since 2021-01-12
  */
 public interface ManagerMapper extends BaseMapper<Manager> {
 

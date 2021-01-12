@@ -1,4 +1,4 @@
-package cn.erectpine.mybootdemo.project.demo.entity;
+package cn.erectpine.mybootdemo.project.core.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wls
- * @since 2021-01-08
+ * @since 2021-01-12
  */
 @Data
 @Accessors(chain = true)
@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 public class Manager implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     /**
      * 主键，自增策略
      */
@@ -96,5 +96,5 @@ public class Manager implements Serializable {
      * 角色
      */
     private Integer       roleId;
-
+    
 }

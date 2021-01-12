@@ -35,3 +35,8 @@ build/
 ### other ###
 mvnw
 mvnw.cmd
+/.mvn/
+/src/test/java/cn/erectpine/mybootdemo/
+/src/test/java/leetcode/
+/src/test/java/Tests
+/src/test/

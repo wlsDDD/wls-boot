@@ -37,27 +37,27 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
      */
     @Override
     public IPage<${entity}> page${entity}(Page<${entity}> page, ${entity} ${table.entityPath}) {
-        return page(page, Wrappers.lambdaQuery(${table.entityPath}).orderByDesc(${entity}::getCreateTime));
-    }
+return page(page, Wrappers.lambdaQuery(${table.entityPath}).orderByDesc(${entity}::getCreateTime));
+}
 
-    /**
-     * 根据id获取${table.comment!}详情
-     *
-     * @param id id
-     * @return {@link ${entity}}
-     */
-    @Override
-    public ${entity} page${entity}(Long id) {
-        return getById(id);
-    }
+/**
+* 根据id获取${table.comment!}详情
+*
+* @param id id
+* @return {@link ${entity}}
+*/
+@Override
+public ${entity} get${entity}ById(Long id) {
+return getById(id);
+}
 
-    /**
-     * 新增-${table.comment!}
-     *
-     * @param ${table.entityPath} ${table.comment!}
-     */
-    @Override
-    public void insert${entity}(${entity} ${table.entityPath}) {
+/**
+* 新增-${table.comment!}
+*
+* @param ${table.entityPath} ${table.comment!}
+*/
+@Override
+public void insert${entity}(${entity} ${table.entityPath}) {
         save(${table.entityPath});
     }
 

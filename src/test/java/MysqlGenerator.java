@@ -22,7 +22,7 @@ public class MysqlGenerator {
     /**
      * 表名称，多个逗号隔开 支持正则表达式
      */
-    static String tableName = "manager";
+    static String tableName   = "manager";
     /**
      * 去除表前缀
      */
@@ -31,11 +31,11 @@ public class MysqlGenerator {
     /**
      * 模块名称
      */
-    static String moduleName = "";
+    static String moduleName  = "core";
     /**
      * 本项目路径
      */
-    static String path = ".demo";
+    static String path        = "";
     /**
      * 包路径
      */
@@ -44,15 +44,15 @@ public class MysqlGenerator {
     /**
      * 数据源-URL
      */
-    static String dataSourceUrl = "jdbc:mysql://rm-bp19te29h9564tk94do.mysql.rds.aliyuncs.com:3306/bluetax_standard?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8";
+    static String dataSourceUrl        = "jdbc:mysql://rm-bp19te29h9564tk94do.mysql.rds.aliyuncs.com:3306/bluetax_standard?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8";
     /**
      * 数据源-用户名
      */
-    static String dataSourceUsername = "adminlearnleader";
+    static String dataSourceUsername   = "adminlearnleader";
     /**
      * 数据源-密码
      */
-    static String dataSourcePassword = "uVi7GebTCWGKw5j91U8GPkg7n0j9R_";
+    static String dataSourcePassword   = "uVi7GebTCWGKw5j91U8GPkg7n0j9R_";
     /**
      * 数据源-驱动
      */
@@ -89,7 +89,7 @@ public class MysqlGenerator {
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(moduleName);
-        pc.setParent(packagePath+path);
+        pc.setParent(packagePath + path);
         mpg.setPackageInfo(pc);
         
         // 自定义配置

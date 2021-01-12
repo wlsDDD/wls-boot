@@ -1,8 +1,8 @@
-package cn.erectpine.mybootdemo.project.demo.service;
+package cn.erectpine.mybootdemo.project.core.service;
 
+import cn.erectpine.mybootdemo.project.core.entity.Manager;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import cn.erectpine.mybootdemo.project.demo.entity.Manager;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author wls
- * @since 2021-01-08
+ * @since 2021-01-12
  */
 public interface IManagerService extends IService<Manager> {
 
@@ -23,14 +23,14 @@ public interface IManagerService extends IService<Manager> {
      * @return 分页列表
      */
     IPage<Manager> pageManager(Page<Manager> page, Manager manager);
-
+    
     /**
      * 根据id获取管理员信息表详情
      *
      * @param id id
      * @return {@link Manager}
      */
-    Manager pageManager(Long id);
+    Manager getManagerById(Long id);
 
     /**
      * 新增-管理员信息表
