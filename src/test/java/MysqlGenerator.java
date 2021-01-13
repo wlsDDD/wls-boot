@@ -151,17 +151,16 @@ public class MysqlGenerator {
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setChainModel(true);
-//        strategy.setSuperEntityClass("info.ycl.gact.platform.framework.web.entity.BaseEntity");
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         // 公共父类
 //        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
+        strategy.setSuperEntityClass("cn.erectpine.mybootdemo.common.web.BaseEntity");
         // 写于父类中的公共字段
-//        strategy.setSuperEntityColumns("ctime", "mtime");
+        strategy.setSuperEntityColumns("createTime", "updateTime", "createBy", "updateBy");
         strategy.setInclude(tableName);
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setEntityTableFieldAnnotationEnable(true);
-//        strategy.setTablePrefix(pc.getModuleName() + "_");
         strategy.setTablePrefix(tablePrefix);
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());

@@ -17,7 +17,7 @@ public class Assert extends org.springframework.util.Assert {
      */
     public static void isZero(Integer count, String message) {
         if (count != 0) {
-            throw new RuntimeException(message);
+            throw new IllegalArgumentException(message);
         }
     }
     

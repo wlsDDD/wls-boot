@@ -1,12 +1,13 @@
 package cn.erectpine.mybootdemo.project.core.entity;
 
+import cn.erectpine.mybootdemo.common.web.BaseEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -17,11 +18,12 @@ import java.time.LocalDateTime;
  * @author wls
  * @since 2021-01-12
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
 @TableName("manager")
-public class Manager implements Serializable {
-
+public class Manager extends BaseEntity {
+    
     private static final long serialVersionUID = 1L;
     
     /**
@@ -70,14 +72,6 @@ public class Manager implements Serializable {
      */
     private Integer       riskWarning;
     /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-    /**
-     * 修改时间
-     */
-    private LocalDateTime updateTime;
-    /**
      * 上次登陆时间
      */
     private LocalDateTime lastLoginTime;
@@ -90,8 +84,6 @@ public class Manager implements Serializable {
      */
     private Boolean       accountNonLocked;
     private Boolean       credentialsNonExpired;
-    private String        createBy;
-    private String        updateBy;
     /**
      * 角色
      */

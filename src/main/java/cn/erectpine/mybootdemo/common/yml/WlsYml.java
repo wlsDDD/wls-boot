@@ -1,4 +1,4 @@
-package cn.erectpine.mybootdemo.framework.config;
+package cn.erectpine.mybootdemo.common.yml;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "wls")
-public class ApplicationConfig {
+public class WlsYml {
     
     /**
      * 名称
@@ -28,8 +28,20 @@ public class ApplicationConfig {
      */
     private String  copyrightYear;
     /**
+     * 文件路径
+     */
+    private String  profile;
+    /**
      * 获取ip地址开关
      */
     private boolean addressEnabled;
+    /**
+     * 日志文件地址
+     */
+    private String  logsPath;
+    /**
+     * 日志级别
+     */
+    private String  logLevel;
     
 }

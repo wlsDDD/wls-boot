@@ -1,5 +1,7 @@
 package cn.erectpine.mybootdemo.project.core.controller;
 
+import cn.erectpine.mybootdemo.common.annotation.Log;
+import cn.erectpine.mybootdemo.common.enums.BusinessType;
 import cn.erectpine.mybootdemo.common.web.ResponseTemplate;
 import cn.erectpine.mybootdemo.project.core.entity.Manager;
 import cn.erectpine.mybootdemo.project.core.service.IManagerService;
@@ -25,6 +27,7 @@ public class ManagerController {
     /**
      * 管理员信息表-分页列表
      */
+    @Log(businessType = BusinessType.SELECT)
     @PostMapping("/list")
     public ResponseTemplate pageManager(@RequestBody Page<Manager> page, Manager manager) {
         return ResponseTemplate.success(managerService.pageManager(page, manager));

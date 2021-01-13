@@ -11,7 +11,7 @@ public class MyBootDemoApplication {
     
     public static void main(String[] args) {
         SpringApplication.run(MyBootDemoApplication.class, args);
-        System.err.println("启动完成!!");
+        System.err.println("(♥◠‿◠)ﾉﾞ  系统启动成功   ლ(´ڡ`ლ)ﾞ  ");
     }
     
 }
