@@ -87,6 +87,7 @@ public class ResponseTemplate extends HashMap<String, Object> {
         return this;
     }
     
+    
     /**
      * 返回成功消息
      *
@@ -125,6 +126,7 @@ public class ResponseTemplate extends HashMap<String, Object> {
     public static ResponseTemplate success(String msg, Object data) {
         return new ResponseTemplate(HttpStatus.SUCCESS, msg, data);
     }
+    
     
     /**
      * 错误
