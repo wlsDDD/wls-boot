@@ -33,38 +33,32 @@
 
     <dependencies>
         <!--************************************** spring 相关 start **********************************************-->
-        <!--SpringBoot核心web-->
+        <!--SpringBoot-web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--SpringBoot整合Redis-->
+        <!--SpringBoot-Redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <!--SpringBoot整合Redis依赖于 pool对象池 -->
+        <!--SpringBoot-Redis依赖于 pool对象池 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
 
-        <!--解析配置文件-->
+        <!--SpringBoot解析配置文件-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- Spring框架基本的核心工具 -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework</groupId>-->
-        <!--            <artifactId>spring-context-support</artifactId>-->
-        <!--        </dependency>-->
-
-        <!--SpringBoot核心aop-->
+        <!--SpringBoot-aop-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>

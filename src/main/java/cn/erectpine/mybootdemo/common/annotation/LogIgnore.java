@@ -1,11 +1,10 @@
 package cn.erectpine.mybootdemo.common.annotation;
 
-import cn.erectpine.mybootdemo.common.enums.IgnoreLevelEnum;
-
 import java.lang.annotation.*;
 
 /**
  * 日志忽略
+ * 默认全忽略
  *
  * @author wls
  * @date 2021/01/13
@@ -15,7 +14,17 @@ import java.lang.annotation.*;
 @Documented
 public @interface LogIgnore {
     /**
-     * 默认不忽略日志
+     * 默认忽略请求数据日志
      */
-    IgnoreLevelEnum[] ignores() default { IgnoreLevelEnum.NONE };
+    boolean ignoreRequestData() default false;
+    
+    /**
+     * 默认忽略响应数据日志
+     */
+    boolean ignoreResponseData() default false;
+    
+    /**
+     * 默认忽略堆栈日志
+     */
+    boolean ignoreStacktrace() default false;
 }

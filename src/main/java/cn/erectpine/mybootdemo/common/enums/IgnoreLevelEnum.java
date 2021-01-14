@@ -8,27 +8,23 @@ package cn.erectpine.mybootdemo.common.enums;
  */
 public enum IgnoreLevelEnum {
     /**
-     * 全部
+     * 请求,返回,堆栈 全忽略
      */
     ALL,
     
     /**
-     * 请求
+     * 请求数据
      */
-    REQUEST,
+    REQUEST_DATA,
     
     /**
-     * 返回
+     * 返回数据
      */
-    RESPONSE,
+    RESPONSE_DATA,
     
     /**
-     * 堆栈
+     * 堆栈日志
      */
     STACKTRACE,
     
-    /**
-     * 无
-     */
-    NONE
 }

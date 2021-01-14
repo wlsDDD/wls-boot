@@ -35,6 +35,11 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseTemplate caughtException(HttpServletRequest request, HttpServletResponse response, Throwable e) {
         
+        if ((e instanceof IllegalArgumentException)) {
+            log.error("【全局异常拦截】参数不合法");
+            return ResponseTemplate.error(-1, e.getMessage());
+        }
+        
         if ((e instanceof BusinessException)) {
             log.error("【全局异常拦截】业务类异常");
             return ResponseTemplate.error(((BaseException) e).getCode(), e.getMessage());
@@ -52,7 +57,7 @@ public class GlobalExceptionHandler {
         
         log.error("【全局异常拦截】 未定义拦截", e);
         if (PROD.equals(environment)) {
-            return ResponseTemplate.error(500, "服务器繁忙!, 晴稍后重试! ");
+            return ResponseTemplate.error(500, "服务器繁忙!, 请稍后重试! ");
         } else {
             return ResponseTemplate.error(500, "服务错误!, 请联系开发人员! " + e);
         }

@@ -1,23 +1,29 @@
 package cn.erectpine.mybootdemo.common.aspect;
 
+import cn.erectpine.mybootdemo.common.annotation.LogIgnore;
 import cn.erectpine.mybootdemo.common.enums.CodeMsgEnum;
 import cn.erectpine.mybootdemo.common.enums.LogTypeEnum;
+import cn.erectpine.mybootdemo.common.util.Assert;
 import cn.erectpine.mybootdemo.common.util.IpUtils;
 import cn.erectpine.mybootdemo.common.util.ServletUtils;
 import cn.erectpine.mybootdemo.common.web.ApiLog;
-import cn.erectpine.mybootdemo.common.web.ResponseTemplate;
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -42,8 +48,15 @@ public class LogAspect {
     
     @Around("logPointCut()")
     public Object around(final ProceedingJoinPoint joinPoint) throws Throwable {
+        LogIgnore logIgnore = getAnnotationLog(joinPoint, LogIgnore.class);
+    
+        // 开始记录日志
         ApiLog apiLog = new ApiLog();
-        apiLog.setRequestData(JSON.toJSONString(joinPoint.getArgs()));
+        if (logIgnore == null) {
+            apiLog.setRequestData(JSON.toJSONString(joinPoint.getArgs()));
+        } else if (logIgnore.ignoreRequestData()) {
+            apiLog.setRequestData(JSON.toJSONString(joinPoint.getArgs()));
+        }
         
         Object proceed = null;
         // 调用方法
@@ -51,12 +64,20 @@ public class LogAspect {
             proceed = joinPoint.proceed();
         } catch (Throwable e) {
             // 记录异常日志
+            if (logIgnore == null) {
+                apiLog.setStacktrace(JSON.toJSONString(e, SerializerFeature.DisableCircularReferenceDetect, SerializerFeature.WriteMapNullValue));
+            } else if (logIgnore.ignoreStacktrace()) {
+                apiLog.setStacktrace(JSON.toJSONString(e, SerializerFeature.DisableCircularReferenceDetect, SerializerFeature.WriteMapNullValue));
+            }
             apiLog.setStatus(CodeMsgEnum.FAIL.getCode())
-                  .setResponseData(JSON.toJSONString(ResponseTemplate.error()))
-                  .setErrorMessage(e.getMessage())
-                  .setStacktrace(JSON.toJSONString(e, SerializerFeature.DisableCircularReferenceDetect, SerializerFeature.WriteMapNullValue));
+                  .setErrorMessage(e.getMessage());
             throw e;
         } finally {
+            if (logIgnore == null) {
+                apiLog.setResponseData((JSON.toJSONString(proceed)));
+            } else if (logIgnore.ignoreResponseData()) {
+                apiLog.setResponseData((JSON.toJSONString(proceed)));
+            }
             HttpServletRequest request = ServletUtils.getRequest();
             if (apiLog.getResponseData() == null) {
                 apiLog.setResponseData((JSON.toJSONString(proceed)));
@@ -64,6 +85,7 @@ public class LogAspect {
             String className = joinPoint.getTarget().getClass().getName();
             String methodName = joinPoint.getSignature().getName();
             // 记录日志
+            Assert.notNull(request, "请求对象不能为空");
             apiLog.setEndTime(LocalDateTime.now())
                   .setExecutionTime(Duration.between(apiLog.getStartTime(), apiLog.getEndTime()).toMillis())
                   .setIp(IpUtils.getIpAddr(request))
@@ -94,77 +116,19 @@ public class LogAspect {
         }
         
     }
-
-//        boolean stacktraceLogRequired = Boolean.TRUE;
-//        boolean requestLogRequired = Boolean.TRUE;
-//        boolean responseLogRequired = Boolean.TRUE;
-
-//        Class<?> clazz = joinPoint.getTarget().getClass();
-//        String methodName = joinPoint.getSignature().getName();
-//        Class<?>[] args = ((MethodSignature) joinPoint.getSignature()).getParameterTypes();
-//        Method method = clazz.getMethod(methodName, args);
     
-    // 日志过滤判断
-//        if (method.isAnnotationPresent(LogIgnore.class)) {
-//            LogIgnore logIgnore = method.getAnnotation(LogIgnore.class);
-//            List<IgnoreLevelEnum> ignores = Arrays.asList(logIgnore.ignores());
-//            if (ignores.contains(STACKTRACE)) {
-//                stacktraceLogRequired = Boolean.FALSE;
-//            }
-//            if (ignores.contains(REQUEST)) {
-//                requestLogRequired = Boolean.FALSE;
-//            }
-//            if (ignores.contains(RESPONSE)) {
-//                responseLogRequired = Boolean.FALSE;
-//            }
-//            if (ignores.contains(ALL)) {
-//                stacktraceLogRequired = Boolean.FALSE;
-//                requestLogRequired = Boolean.FALSE;
-//                responseLogRequired = Boolean.FALSE;
-//            }
-//        }
-
-//        MDC.put(IS_LOG_STACKTRACE, String.valueOf(stacktraceLogRequired));
-//        MDC.put(IS_LOG_REQUEST, String.valueOf(requestLogRequired));
-//        MDC.put(IS_LOG_RESPONSE, String.valueOf(responseLogRequired));
-
-//        // 记录日志参数
-//        MDC.put(START_TIME_KEY, String.valueOf(System.currentTimeMillis()));
-//        String invokeInterface = joinPoint.getSignature().getDeclaringType().getSimpleName() + "." +
-//                                 joinPoint.getSignature().getName();
-//        MDC.put(INVOKE_INTERFACE_KEY, invokeInterface);
-//        MDC.put(AUTHORIZATION_KEY, request.getHeader("Authorization"));
-//        MDC.put(REMOTE_IP_KEY, request.getRemoteAddr());
-//        MDC.put(URL_KEY, request.getRequestURL().toString());
-//        CurrentManager manager = ManagerUtils.manager(false);
-//        String managerInfo = "管理员信息为空";
-//        if (null != manager) {
-//            managerInfo = manager.getManagerName()
-//                          + "-" + manager.getAccount()
-//                          + "-" + manager.getManagerId()
-//                          + "-" + manager.getGroupCode()
-//                          + "-" + manager.getEmail()
-//                          + "-" + (1 == manager.getManagerType() ? "超级管理员" : "普通管理员");
-//        }
-//        MDC.put(MANAGER_INFO_KEY, managerInfo);
-//
-//        ObjectMapper mapper = new ObjectMapper();
-//        try {
-//            MDC.put(REQUEST_INFO_KEY, JSONArray.toJSONString(joinPoint.getArgs()));
-//        } catch (Exception e) {
-//            log.error("记录请求体日志异常");
-//        }
-//        // 业务逻辑处理
-//        Object result = joinPoint.proceed();
-//
-//        // 记录处理结果
-//        MDC.put(RESPONSE_INFO_KEY,
-//            mapper.writeValueAsString(null == result ? HttpResult.success() : result));
-//
-//        // 打印日志
-//        LogUtils.info();
-
-//        return result;
-
-
+    /**
+     * 是否存在注解，如果存在就获取
+     */
+    private <T extends Annotation> T getAnnotationLog(JoinPoint joinPoint, Class<T> clazz) throws Exception {
+        Signature signature = joinPoint.getSignature();
+        MethodSignature methodSignature = (MethodSignature) signature;
+        Method method = methodSignature.getMethod();
+        
+        if (method != null) {
+            return method.getAnnotation(clazz);
+        }
+        return null;
+    }
+    
 }

@@ -1,12 +1,11 @@
 package cn.erectpine.mybootdemo.project.core.controller;
 
+import cn.erectpine.mybootdemo.common.web.ResponseTemplate;
+import cn.erectpine.mybootdemo.project.core.entity.Dept;
+import cn.erectpine.mybootdemo.project.core.service.IDeptService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import cn.erectpine.mybootdemo.project.core.entity.Dept;
-import cn.erectpine.mybootdemo.project.core.service.IDeptService;
-import org.springframework.web.bind.annotation.RestController;
-import cn.erectpine.mybootdemo.common.web.ResponseTemplate;
 
 /**
  * <p>
@@ -19,10 +18,10 @@ import cn.erectpine.mybootdemo.common.web.ResponseTemplate;
 @RestController
 @RequestMapping("/core/dept")
 public class DeptController {
-
+    
     @Autowired
     IDeptService deptService;
-
+    
     /**
      * 部门表-分页列表
      */
@@ -30,7 +29,7 @@ public class DeptController {
     public ResponseTemplate pageDept(@RequestBody Page<Dept> page, Dept dept) {
         return ResponseTemplate.success(deptService.pageDept(page, dept));
     }
-
+    
     /**
      * 根据id获取部门表详情
      */
@@ -38,7 +37,7 @@ public class DeptController {
     public ResponseTemplate getDeptById(@PathVariable Long id) {
         return ResponseTemplate.success(deptService.getDeptById(id));
     }
-
+    
     /**
      * 新增-部门表
      */
@@ -47,7 +46,7 @@ public class DeptController {
         deptService.insertDept(dept);
         return ResponseTemplate.success();
     }
-
+    
     /**
      * 修改-部门表
      */
@@ -56,7 +55,7 @@ public class DeptController {
         deptService.updateDept(dept);
         return ResponseTemplate.success();
     }
-
+    
     /**
      * 删除-部门表
      */
@@ -65,5 +64,5 @@ public class DeptController {
         deptService.deleteDept(id);
         return ResponseTemplate.success();
     }
-
+    
 }
