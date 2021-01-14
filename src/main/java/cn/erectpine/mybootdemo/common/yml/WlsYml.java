@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
 public class WlsYml {
     
     /**
-     * 名称
+     * 服务名
      */
-    private String  name;
+    private String  serviceName;
     /**
      * 版本
      */

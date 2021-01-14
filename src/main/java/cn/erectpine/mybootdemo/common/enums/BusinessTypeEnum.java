@@ -6,7 +6,7 @@ package cn.erectpine.mybootdemo.common.enums;
  * @author wls
  * @date 2021/01/13
  */
-public enum BusinessType {
+public enum BusinessTypeEnum {
     
     /**
      * 其它

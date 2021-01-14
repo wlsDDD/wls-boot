@@ -14,23 +14,23 @@ import ${package.Service}.${table.serviceName};
 <#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
 <#else>
-    import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Controller;
 </#if>
 <#if superControllerClassPackage??>
-    import ${superControllerClassPackage};
+import ${superControllerClassPackage};
 </#if>
 import cn.erectpine.mybootdemo.common.web.ResponseTemplate;
 
 /**
-* <p>
-    * ${table.comment} 前端控制器
-    * </p>
-*
-* @author ${author}
-* @since ${date}
-*/
+ * <p>
+ * ${table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
 <#if swagger2>
-    @ApiModelProperty(value = "${field.comment}")
+@ApiModelProperty(value = "${field.comment}")
 <#else>
 </#if>
 <#if restControllerStyle>
@@ -42,77 +42,77 @@ import cn.erectpine.mybootdemo.common.web.ResponseTemplate;
 <#if kotlin>
 class ${table.controllerName}<#if superControllerClass??> : ${superControllerClass}()</#if>
 <#else>
-    <#if superControllerClass??>
-        public class ${table.controllerName} extends ${superControllerClass} {
-    <#else>
-        public class ${table.controllerName} {
-    </#if>
+<#if superControllerClass??>
+public class ${table.controllerName} extends ${superControllerClass} {
+<#else>
+public class ${table.controllerName} {
+</#if>
 
     @Autowired
     ${table.serviceName} ${table.entityPath}Service;
 
     <#if !swagger2>
-        /**
-        * ${table.comment!}-分页列表
-        */
+    /**
+     * ${table.comment!}-分页列表
+     */
     <#else>
-        @ApiOperation("${table.comment!}-分页列表")
+    @ApiOperation("${table.comment!}-分页列表")
     </#if>
     @PostMapping("/list")
     public ResponseTemplate page${entity}(@RequestBody <#if swagger2>@ApiIgnore </#if>Page<${entity}> page, ${entity} ${table.entityPath}) {
-    return ResponseTemplate.success(${table.entityPath}Service.page${entity}(page, ${table.entityPath}));
+        return ResponseTemplate.success(${table.entityPath}Service.page${entity}(page, ${table.entityPath}));
     }
 
     <#if !swagger2>
-        /**
-        * 根据id获取${table.comment!}详情
-        */
+    /**
+     * 根据id获取${table.comment!}详情
+     */
     <#else>
-        @ApiOperation("根据id获取${table.comment!}详情")
+    @ApiOperation("根据id获取${table.comment!}详情")
     </#if>
     @GetMapping("/{id}")
     public ResponseTemplate get${entity}ById(@PathVariable Long id) {
-    return ResponseTemplate.success(${table.entityPath}Service.get${entity}ById(id));
+        return ResponseTemplate.success(${table.entityPath}Service.get${entity}ById(id));
     }
 
     <#if !swagger2>
-        /**
-        * 新增-${table.comment!}
-        */
+    /**
+     * 新增-${table.comment!}
+     */
     <#else>
-        @ApiOperation("新增-${table.comment!}")
+    @ApiOperation("新增-${table.comment!}")
     </#if>
     @PostMapping
     public ResponseTemplate insert${entity}(@RequestBody ${entity} ${table.entityPath}) {
-    ${table.entityPath}Service.insert${entity}(${table.entityPath});
-    return ResponseTemplate.success();
+        ${table.entityPath}Service.insert${entity}(${table.entityPath});
+        return ResponseTemplate.success();
     }
 
     <#if !swagger2>
-        /**
-        * 修改-${table.comment!}
-        */
+    /**
+     * 修改-${table.comment!}
+     */
     <#else>
-        @ApiOperation("修改-${table.comment!}")
+    @ApiOperation("修改-${table.comment!}")
     </#if>
     @PutMapping
     public ResponseTemplate update${entity}(@RequestBody ${entity} ${table.entityPath}) {
-    ${table.entityPath}Service.update${entity}(${table.entityPath});
-    return ResponseTemplate.success();
+        ${table.entityPath}Service.update${entity}(${table.entityPath});
+        return ResponseTemplate.success();
     }
 
     <#if !swagger2>
-        /**
-        * 删除-${table.comment!}
-        */
+    /**
+     * 删除-${table.comment!}
+     */
     <#else>
-        @ApiOperation("删除-${table.comment!}")
+    @ApiOperation("删除-${table.comment!}")
     </#if>
     @DeleteMapping("/{id}")
     public ResponseTemplate delete${entity}(@PathVariable("id") Long id) {
-    ${table.entityPath}Service.delete${entity}(id);
-    return ResponseTemplate.success();
+        ${table.entityPath}Service.delete${entity}(id);
+        return ResponseTemplate.success();
     }
 
-    }
+}
 </#if>

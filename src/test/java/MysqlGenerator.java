@@ -22,11 +22,11 @@ public class MysqlGenerator {
     /**
      * 表名称，多个逗号隔开 支持正则表达式
      */
-    static String tableName   = "manager";
+    static String tableName   = "sys_dept";
     /**
      * 去除表前缀
      */
-    static String tablePrefix = "";
+    static String tablePrefix = "sys_";
     
     /**
      * 模块名称
@@ -44,15 +44,15 @@ public class MysqlGenerator {
     /**
      * 数据源-URL
      */
-    static String dataSourceUrl        = "jdbc:mysql://rm-bp19te29h9564tk94do.mysql.rds.aliyuncs.com:3306/bluetax_standard?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8";
+    static String dataSourceUrl        = "jdbc:mysql://localhost:3306/ruoyi-vue?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8";
     /**
      * 数据源-用户名
      */
-    static String dataSourceUsername   = "adminlearnleader";
+    static String dataSourceUsername   = "root";
     /**
      * 数据源-密码
      */
-    static String dataSourcePassword   = "uVi7GebTCWGKw5j91U8GPkg7n0j9R_";
+    static String dataSourcePassword   = "root";
     /**
      * 数据源-驱动
      */
@@ -157,7 +157,7 @@ public class MysqlGenerator {
 //        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         strategy.setSuperEntityClass("cn.erectpine.mybootdemo.common.web.BaseEntity");
         // 写于父类中的公共字段
-        strategy.setSuperEntityColumns("createTime", "updateTime", "createBy", "updateBy");
+        strategy.setSuperEntityColumns("create_time", "update_time", "create_by", "update_by");
         strategy.setInclude(tableName);
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setEntityTableFieldAnnotationEnable(true);

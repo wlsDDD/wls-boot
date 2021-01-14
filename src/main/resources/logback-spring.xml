@@ -11,7 +11,9 @@
     <property name="log.level" value="${logLevel}"/>
     <!-- 日志输出格式 -->
     <property name="log.pattern"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{50}) - %yellow([%file:%line]) - %msg%n"/>
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%thread] %cyan(%logger{50}:%line) : %highlight(%msg%n)"/>
+
+    <!--    <property name="log.pattern" value="%d{MM-dd HH:mm:ss.SSS}|%level|%logger{36}:%line|%thread|%msg%n"/>-->
     <!--	<property name="log.pattern" value="%d{yyyy/MM/dd HH:mm:ss.SSS} %cyan(%-5level) [%thread] [%c{0}:%L] %magenta(%logger{36}): %msg%n" />-->
 
     <!-- ConsoleAppender 控制台输出日志 -->
