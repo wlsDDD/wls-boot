@@ -14,6 +14,12 @@ wls:
   logsPath: /Users/${spring.application.name}/${spring.profiles.active}-log/
   # 日志级别
   logLevel: info
+  demo:
+    demo1: demo1
+    demo2: demo2
+  demo-array:
+    - demo3
+    - demo4
 
 
 # 开发环境配置

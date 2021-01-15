@@ -55,7 +55,7 @@ public class GlobalExceptionHandler {
             return ResponseTemplate.error(5001, "数据库连接超时!, 请稍后重试! " + e.getMessage());
         }
         
-        log.error("【全局异常拦截】 未定义拦截", e);
+        log.error("【全局异常拦截】", e);
         if (PROD.equals(environment)) {
             return ResponseTemplate.error(500, "服务器繁忙!, 请稍后重试! ");
         } else {

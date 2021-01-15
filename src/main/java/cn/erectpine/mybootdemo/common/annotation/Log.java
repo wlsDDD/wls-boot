@@ -1,7 +1,7 @@
 package cn.erectpine.mybootdemo.common.annotation;
 
 
-import cn.erectpine.mybootdemo.common.enums.BusinessTypeEnum;
+import cn.erectpine.mybootdemo.common.enums.BusinessEnum;
 
 import java.lang.annotation.*;
 
@@ -18,7 +18,7 @@ public @interface Log {
     /**
      * 请求数据类型
      */
-    BusinessTypeEnum value() default BusinessTypeEnum.OTHER;
+    BusinessEnum value() default BusinessEnum.OTHER;
     
     /**
      * 模块

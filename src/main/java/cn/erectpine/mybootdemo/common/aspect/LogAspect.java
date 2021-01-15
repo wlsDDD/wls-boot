@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * 日志切面
  *
- * @author 16269
+ * @author wls
  * @date 2021/01/13
  */
 @Slf4j
@@ -36,7 +36,7 @@ import java.util.Map;
 public class LogAspect {
     
     /**
-     * 配置织入点
+     * 配置切入点
      */
     @Pointcut("execution(* cn.erectpine.mybootdemo.project.*.controller..*.*(..))")
     public void logPointCut() {
@@ -102,9 +102,11 @@ public class LogAspect {
         if (CodeMsgEnum.SUCCESS.getCode().equals(apiLog.getStatus())) {
             log.info(LogTypeEnum.INFO.getDelimiter());
             logMap.forEach((s, o) -> log.info(s + ": {}", o));
+            log.info(LogTypeEnum.END.getDelimiter());
         } else {
             log.warn(LogTypeEnum.ERROR.getDelimiter());
             logMap.forEach((s, o) -> log.warn(s + ": {}", o));
+            log.warn(LogTypeEnum.END.getDelimiter());
         }
         
     }
