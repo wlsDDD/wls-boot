@@ -64,7 +64,7 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!--*************************************** spring 相关 end ************************************************-->
+        <!--*************************************** 项目主要依赖 ************************************************-->
 
         <!-- Mysql驱动包 -->
         <dependency>
@@ -121,6 +121,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--mybatis-plus-代码生成器-->

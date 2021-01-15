@@ -32,7 +32,7 @@ public class CoreUtils {
     static {
         TREE_CONFIG = new TreeNodeConfig();
         TREE_CONFIG.setIdKey("id");
-        TREE_CONFIG.setParentIdKey("pid");
+        TREE_CONFIG.setParentIdKey("parentId");
         TREE_CONFIG.setWeightKey("createTime");
     }
     
@@ -50,26 +50,35 @@ public class CoreUtils {
     /**
      * 列表转树
      *
-     * @param list     列表
-     * @param rootNode 是否不存在根节点
-     *                 true 不存在,自动寻找无上级节点成为根节点;
-     *                 false 存在根节点且为0 此时直接调用 toTree(List<T> list)
+     * @param list           列表
+     * @param treeNodeConfig 转换配置
      * @return {@link List} 树列表
      * @Author wls
      */
-    public static <T> List<Tree<Long>> toTree(List<T> list, boolean rootNode) {
-        if (rootNode) {
-            return toTree(list.parallelStream().peek(e -> {
-                Map<String, Object> map = BeanUtil.beanToMap(e);
-                if (list.parallelStream().noneMatch(value -> BeanUtil.beanToMap(value).get(TREE_CONFIG.getIdKey())
-                                                                     .equals(map.get(TREE_CONFIG.getParentIdKey())))) {
-                    map.put(TREE_CONFIG.getParentIdKey(), 0L);
-                    e = (T) BeanUtil.toBean(map, e.getClass());
-                }
-            }).collect(Collectors.toList()));
-        }
-        return toTree(list);
+    public static <T> List<Tree<Long>> toTree(List<T> list, TreeNodeConfig treeNodeConfig) {
+        return TreeUtil.build(list, 0L, treeNodeConfig, (treeNode, tree) -> tree.putAll(BeanUtil.beanToMap(treeNode)));
     }
+    
+    /**
+     * 寻找无上级节点,并将其转换为根节点
+     *
+     * @param list           列表
+     * @param treeNodeConfig 转换配置
+     * @return 列表
+     */
+    public static <T> List<T> convertRootNode(List<T> list, TreeNodeConfig treeNodeConfig) {
+        return list.parallelStream().map(e -> {
+            Map<String, Object> map = BeanUtil.beanToMap(e);
+            if (list.parallelStream().noneMatch(
+                    value -> BeanUtil.beanToMap(value).get(treeNodeConfig.getIdKey())
+                                     .equals(map.get(treeNodeConfig.getParentIdKey())))) {
+                map.put(treeNodeConfig.getParentIdKey(), 0L);
+                return (T) BeanUtil.toBean(map, e.getClass());
+            }
+            return e;
+        }).collect(Collectors.toList());
+    }
+    
     
     /**
      * 浅拷贝-拷贝属性
