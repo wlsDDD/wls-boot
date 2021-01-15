@@ -13,6 +13,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface LogIgnore {
+    
     /**
      * 默认忽略请求数据日志
      */

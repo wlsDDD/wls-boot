@@ -1,6 +1,5 @@
 package cn.erectpine.mybootdemo.common.web;
 
-import cn.erectpine.mybootdemo.common.enums.CodeMsgEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -19,7 +18,7 @@ public class ApiLog {
     /**
      * 请求状态 0成功 1失败
      */
-    private Integer       status    = CodeMsgEnum.SUCCESS.getCode();
+    private Integer       status;
     /**
      * 接口耗时 单位毫秒
      */
@@ -47,7 +46,7 @@ public class ApiLog {
     /**
      * 接口调用开始时间
      */
-    private LocalDateTime startTime = LocalDateTime.now();
+    private LocalDateTime startTime;
     /**
      * 接口调用结束或异常终止时间
      */

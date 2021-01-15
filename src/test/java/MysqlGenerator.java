@@ -22,7 +22,7 @@ public class MysqlGenerator {
     /**
      * 表名称，多个逗号隔开 支持正则表达式
      */
-    static String tableName   = "sys_dept";
+    static String tableName   = "sys_menu";
     /**
      * 去除表前缀
      */

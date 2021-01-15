@@ -37,3 +37,5 @@ mvnw
 mvnw.cmd
 /.mvn/
 /src/test/
+/src/main/java/cn/erectpine/mybootdemo/project/
+/src/main/resources/mapper/

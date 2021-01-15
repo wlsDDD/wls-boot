@@ -42,12 +42,25 @@ public class LogAspect {
     public void logPointCut() {
     }
     
+    /**
+     * 配置切入点
+     */
+    @Pointcut("@annotation(cn.erectpine.mybootdemo.common.annotation.Log)")
+    public void pointCut() {
+    }
+    
+    /**
+     * 日志切面
+     * 记录日志
+     */
     @Around("logPointCut()")
     public Object around(final ProceedingJoinPoint joinPoint) throws Throwable {
         LogIgnore logIgnore = Aspects.getAnnotationLog(joinPoint, LogIgnore.class);
         
         // 开始记录日志
         ApiLog apiLog = new ApiLog();
+        apiLog.setStartTime(LocalDateTime.now());
+        apiLog.setStatus(CodeMsgEnum.SUCCESS.getCode());
         if (logIgnore == null) {
             apiLog.setRequestData(JSON.toJSONString(joinPoint.getArgs()));
         } else if (logIgnore.ignoreRequestData()) {

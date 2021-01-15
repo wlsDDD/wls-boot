@@ -24,7 +24,7 @@ import java.sql.SQLRecoverableException;
 public class GlobalExceptionHandler {
     
     @Value("${spring.profiles.active}")
-    private String environment;
+    public static String environment;
     
     private static final String DEV  = "dev";
     private static final String BETA = "beta";

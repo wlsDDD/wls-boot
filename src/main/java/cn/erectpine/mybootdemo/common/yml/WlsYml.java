@@ -4,9 +4,6 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 /**
  * 项目相关配置
  *
@@ -15,7 +12,7 @@ import java.util.Map;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "wls")
+@ConfigurationProperties("wls")
 public class WlsYml {
     
     /**
@@ -46,15 +43,5 @@ public class WlsYml {
      * 日志级别
      */
     private String  logLevel;
-    
-    private Map<String, String> demo;
-    
-    private ArrayList<String> demoArray;
-    
-    @Data
-    static class Demo {
-        private String demo1;
-        private String demo2;
-    }
     
 }
