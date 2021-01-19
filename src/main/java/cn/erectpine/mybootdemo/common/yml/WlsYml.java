@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties("wls")
-public class WlsYml {
+public final class WlsYml {
     
     /**
      * 服务名
@@ -43,5 +43,9 @@ public class WlsYml {
      * 日志级别
      */
     private String  logLevel;
+    
+    static final class Demo {
+    
+    }
     
 }

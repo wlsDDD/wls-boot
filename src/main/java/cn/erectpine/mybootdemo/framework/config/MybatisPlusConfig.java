@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Configuration;
 /**
  * MybatisPlus分页插件配置
  *
- * @since 2021-01-11 13:53
  * @author wls
+ * @since 2021-01-11 13:53
  */
 @MapperScan("cn.erectpine.mybootdemo.project.*.mapper")
 @Configuration
 public class MybatisPlusConfig {
-
+    
     /**
      * 新的分页插件,一缓和二缓遵循mybatis的规则,需要设置 MybatisConfiguration#useDeprecatedExecutor = false
      * 避免缓存出现问题(该属性会在旧插件移除后一同移除)

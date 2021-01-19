@@ -28,7 +28,7 @@ import java.util.Map;
  * 日志切面
  *
  * @author wls
- * @date 2021/01/13
+ * @date 2021/01/15
  */
 @Slf4j
 @Aspect
@@ -78,7 +78,7 @@ public class LogAspect {
             } else if (logIgnore.ignoreStacktrace()) {
                 apiLog.setStacktrace(JSON.toJSONString(e, SerializerFeature.DisableCircularReferenceDetect, SerializerFeature.WriteMapNullValue));
             }
-            apiLog.setStatus(CodeMsgEnum.FAIL.getCode())
+            apiLog.setStatus(CodeMsgEnum.ERROR.getCode())
                   .setErrorMessage(e.getMessage());
             throw e;
         } finally {
@@ -92,7 +92,7 @@ public class LogAspect {
             // 记录日志
             Assert.notNull(request, "请求对象不能为空");
             apiLog.setEndTime(LocalDateTime.now())
-                  .setExecutionTime(Duration.between(apiLog.getStartTime(), apiLog.getEndTime()).toMillis())
+                  .setConsumeTime(Duration.between(apiLog.getStartTime(), apiLog.getEndTime()).toMillis())
                   .setIp(IpUtils.getIpAddr(request))
                   .setUrl(request.getRequestURL().toString())
                   .setAuthorization(request.getHeader("Authorization"))
@@ -107,7 +107,7 @@ public class LogAspect {
      * 将日志输出到控制台
      * TODO 将日志保存到数据库
      *
-     * @param apiLog 日志信息
+     * @param apiLog {@link ApiLog}
      */
     @Async
     public void consoleLogSync(ApiLog apiLog) {

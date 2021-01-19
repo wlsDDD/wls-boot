@@ -16,13 +16,13 @@ import java.time.LocalDateTime;
 public class ApiLog {
     
     /**
-     * 请求状态 0成功 1失败
+     * 请求状态 200成功 500失败
      */
     private Integer       status;
     /**
      * 接口耗时 单位毫秒
      */
-    private long          executionTime;
+    private long          consumeTime;
     /**
      * 请求数据
      */

@@ -11,26 +11,26 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 <#if entityLombokModel>
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-<#if chainModel>
-import lombok.experimental.Accessors;
-</#if>
+    import lombok.Data;
+    import lombok.EqualsAndHashCode;
+    <#if chainModel>
+        import lombok.experimental.Accessors;
+    </#if>
 </#if>
 
 /**
- * <p>
- * ${table.comment!}
- * </p>
- *
- * @author ${author}
- * @since ${date}
- */
+* <p>
+    * ${table.comment?substring(0,table.comment?length-1)}
+    * </p>
+*
+* @author ${author}
+* @since ${date}
+*/
 <#if entityLombokModel>
-@Data
-<#if superEntityClass??>
-@EqualsAndHashCode(callSuper = true)
-</#if>
+    @Data
+    <#if superEntityClass??>
+        @EqualsAndHashCode(callSuper = true)
+    </#if>
 <#if chainModel>
 @Accessors(chain = true)
 </#if>
@@ -39,7 +39,7 @@ import lombok.experimental.Accessors;
 @TableName("${table.name}")
 </#if>
 <#if swagger2>
-@ApiModel(value = "${entity}对象", description = "${table.comment!}")
+    @ApiModel(value = "${entity}对象", description = "${table.comment?substring(0,table.comment?length-1)}")
 </#if>
 <#if superEntityClass??>
 public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {

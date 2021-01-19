@@ -41,7 +41,7 @@ spring:
 
   # json中忽略null属性值
   jackson:
-    # 这个配置没看懂有啥用...
+    # 这个配置暂时没搞懂有啥用...
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
     default-property-inclusion: non_null
@@ -100,7 +100,7 @@ spring:
       # 单个文件大小
       max-file-size: 10MB
       # 设置总上传的文件大小
-      max-request-size: 20MB
+      max-request-size: 50MB
 
   # 服务模块
   devtools:
@@ -111,7 +111,7 @@ spring:
   # redis 配置
   redis:
     # 地址
-    host: 123.57.101.219
+    host: localhost
     # 端口，默认为6379
     port: 6379
     # 数据库索引
@@ -133,6 +133,12 @@ spring:
 
 # MyBatis
 mybatis-plus:
+  # 扫描加载枚举
+  typeEnumsPackage: cn.erectpine.mybootdemo.common.enums
+  # 扫描识别加载*mapper.xml
+  #mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 扫描加载包别名
+  #typeAliasesPackage: cn.erectpine.mybootdemo.project.*.entity
   global-config:
     db-config:
       # 设置空不查询
@@ -157,3 +163,7 @@ mybatis-plus:
     # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+# Logger Config
+logging:
+  level:
+    com.baomidou.mybatisplus.samples: debug

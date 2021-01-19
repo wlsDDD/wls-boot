@@ -3,12 +3,12 @@ package cn.erectpine.mybootdemo.common.web;
 
 import cn.erectpine.mybootdemo.common.constant.HttpStatus;
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.IdUtil;
 
 import java.util.HashMap;
 
 /**
  * 响应模板
- * 操作消息提醒
  *
  * @author wls
  * @date 2021/01/12
@@ -20,15 +20,19 @@ public class ResponseTemplate extends HashMap<String, Object> {
     /**
      * 状态码
      */
-    public static final String CODE_TAG = "code";
+    public static final String CODE_TAG   = "code";
     /**
      * 返回内容
      */
-    public static final String MSG_TAG  = "msg";
+    public static final String MSG_TAG    = "msg";
     /**
      * 数据对象
      */
-    public static final String DATA_TAG = "data";
+    public static final String DATA_TAG   = "data";
+    /**
+     * 请求唯一ID
+     */
+    public static final String REQUEST_ID = "requestId";
     
     /**
      * 请求操作成功提示语
@@ -67,6 +71,7 @@ public class ResponseTemplate extends HashMap<String, Object> {
     public ResponseTemplate(int code, String msg, Object data) {
         super.put(CODE_TAG, code);
         super.put(MSG_TAG, msg);
+        super.put(REQUEST_ID, IdUtil.fastUUID());
         if (BeanUtil.isNotEmpty(data)) {
             super.put(DATA_TAG, data);
         }

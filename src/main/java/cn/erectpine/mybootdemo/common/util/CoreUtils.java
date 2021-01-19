@@ -65,6 +65,7 @@ public class CoreUtils {
      * @param list           列表
      * @param treeNodeConfig 转换配置
      * @return 列表
+     * @Author wls
      */
     public static <T> List<T> convertRootNode(List<T> list, TreeNodeConfig treeNodeConfig) {
         return list.parallelStream().map(e -> {
@@ -88,6 +89,7 @@ public class CoreUtils {
      * @param old   源对象
      * @param fresh 拷贝后的对象
      * @return fresh
+     * @Author wls
      */
     public static <T> T convertFor(Object old, T fresh) {
         BeanUtils.copyProperties(old, fresh);

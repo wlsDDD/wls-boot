@@ -14,8 +14,8 @@
         <spring.boot.version>2.4.1</spring.boot.version>
         <mybatis.plus.version>3.4.1</mybatis.plus.version>
         <druid.version>1.2.4</druid.version>
-        <fastjson>1.2.74</fastjson>
-        <hutool>5.5.7</hutool>
+        <hutool.version>5.5.7</hutool.version>
+        <fastjson.version>1.2.74</fastjson.version>
     </properties>
 
     <dependencyManagement>
@@ -32,7 +32,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <!--************************************** spring 相关 start **********************************************-->
+        <!--*************************************** spring 相关  *************************************************-->
         <!--SpringBoot-web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -45,7 +45,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <!--SpringBoot-Redis依赖于 pool对象池 -->
+        <!--SpringBoot-Redis依赖于 pool对象池-->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
@@ -90,17 +90,17 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>${hutool}</version>
+            <version>${hutool.version}</version>
         </dependency>
 
         <!--阿里fastjson-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>${fastjson}</version>
+            <version>${fastjson.version}</version>
         </dependency>
 
-        <!--*****************************************开发工具库****************************************************-->
+        <!--***************************************** 开发工具库 ****************************************************-->
         <!--热启动依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -127,6 +127,12 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>p6spy</groupId>
+            <artifactId>p6spy</artifactId>
+            <version>3.9.1</version>
         </dependency>
 
         <!--mybatis-plus-代码生成器-->

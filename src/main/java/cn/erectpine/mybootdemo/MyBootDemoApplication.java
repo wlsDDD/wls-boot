@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author wls
+ * @date 2021/01/19 09:47:28
  */
 @SpringBootApplication
 public class MyBootDemoApplication {

@@ -1,6 +1,7 @@
 package cn.erectpine.mybootdemo.common.enums;
 
 
+import cn.erectpine.mybootdemo.common.constant.HttpStatus;
 import lombok.Getter;
 
 /**
@@ -15,8 +16,8 @@ public enum CodeMsgEnum {
     /**
      * 成功返回信息code&msg
      */
-    SUCCESS(0, "success"),
-    FAIL(5000, "fail"),
+    SUCCESS(HttpStatus.SUCCESS, "success"),
+    ERROR(HttpStatus.ERROR, "fail"),
     /**
      * 统一验证参数错误
      */
@@ -27,8 +28,8 @@ public enum CodeMsgEnum {
     ;
     
     
-    private final Integer    code;
-    private       String msg;
+    private final Integer code;
+    private       String  msg;
     
     
     CodeMsgEnum(int code, String msg) {

@@ -22,7 +22,7 @@ public class MysqlGenerator {
     /**
      * 表名称，多个逗号隔开 支持正则表达式
      */
-    static String tableName   = "sys_menu";
+    static String tableName   = "sys_config";
     /**
      * 去除表前缀
      */
@@ -85,7 +85,8 @@ public class MysqlGenerator {
         dsc.setUsername(dataSourceUsername);
         dsc.setPassword(dataSourcePassword);
         mpg.setDataSource(dsc);
-        
+    
+    
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(moduleName);
@@ -142,10 +143,10 @@ public class MysqlGenerator {
         templateConfig.setController("ftl/mysql/controller.java");
         templateConfig.setService("ftl/mysql/service.java");
         templateConfig.setServiceImpl("ftl/mysql/serviceImpl.java");
-        
+    
         templateConfig.setXml(null);
         mpg.setTemplate(templateConfig);
-        
+    
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
@@ -153,6 +154,8 @@ public class MysqlGenerator {
         strategy.setChainModel(true);
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
+        strategy.setEntityBooleanColumnRemoveIsPrefix(true);
+    
         // 公共父类
 //        strategy.setSuperControllerClass("你自己的父类控制器,没有就不用设置!");
         strategy.setSuperEntityClass("cn.erectpine.mybootdemo.common.web.BaseEntity");

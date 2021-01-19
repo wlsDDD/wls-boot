@@ -6,23 +6,23 @@ import ${package.Entity}.${entity};
 import ${superServiceClassPackage};
 
 /**
- * <p>
- * ${table.comment!} 服务类
- * </p>
- *
- * @author ${author}
- * @since ${date}
- */
+* <p>
+    * ${table.comment?substring(0,table.comment?length-1)} 服务类
+    * </p>
+*
+* @author ${author}
+* @since ${date}
+*/
 <#if kotlin>
-interface ${table.serviceName} : ${superServiceClass}<${entity}>
+    interface ${table.serviceName} : ${superServiceClass}<${entity}>
 <#else>
-public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+    public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
 
     /**
-     * ${table.comment!}-列表
-     *
-     * @param page      分页参数
-     * @param ${table.entityPath} 查询条件
+    * ${table.comment?substring(0,table.comment?length-1)}-列表
+    *
+    * @param page      分页参数
+    * @param ${table.entityPath} 查询条件
     * @return 分页列表
     */
     IPage<${entity}> page${entity}(Page<${entity}> page, ${entity} ${table.entityPath});
@@ -36,25 +36,25 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
     ${entity} get${entity}ById(Long id);
 
     /**
-    * 新增-${table.comment!}
+    * 新增-${table.comment?substring(0,table.comment?length-1)}
     *
-    * @param ${table.entityPath} ${table.comment!}
+    * @param ${table.entityPath} ${table.comment?substring(0,table.comment?length-1)}
     */
     void insert${entity}(${entity} ${table.entityPath});
 
     /**
-    * 修改-${table.comment!}
-     *
-     * @param ${table.entityPath} ${table.comment!}
-     */
+    * 修改-${table.comment?substring(0,table.comment?length-1)}
+    *
+    * @param ${table.entityPath} ${table.comment?substring(0,table.comment?length-1)}
+    */
     void update${entity}(${entity} ${table.entityPath});
 
     /**
-     * 删除-${table.comment!}
-     *
-     * @param id id
-     */
+    * 删除-${table.comment?substring(0,table.comment?length-1)}
+    *
+    * @param id id
+    */
     void delete${entity}(Long id);
 
-}
+    }
 </#if>
